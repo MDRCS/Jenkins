@@ -3,14 +3,15 @@ pipeline {
     stages {
       stage('Build') {
         steps {
-            sh '''
-                which make
-                make build
-               '''
+            echo "Building .."
+            which make
+            sh 'make build'
+
         }
       }
       stage('Unit Test') {
         steps {
+            echo "Building .."
             sh 'make test'
         }
       }
