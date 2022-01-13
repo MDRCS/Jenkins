@@ -3,12 +3,12 @@ pipeline {
     stages {
       stage('Build') {
         steps {
-            'make build'
+            sh 'make build'
         }
       }
       stage('Unit Test') {
         steps {
-            'make test'
+            sh 'make test'
         }
       }
     }
