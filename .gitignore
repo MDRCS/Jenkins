@@ -2,6 +2,10 @@
 #  http://jenkins-ci.org/
 #  https://wiki.jenkins-ci.org/display/JENKINS/Administering+Jenkins
 
+.idea/*
+.DS_Store
+__pycache__/
+
 #ignore all JENKINS_HOME except jobs directory, root xml config, and .gitignore file
 !.idea
 !/jobs
