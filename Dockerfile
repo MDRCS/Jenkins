@@ -36,7 +36,7 @@ RUN mkdir /public_assets
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install --system --deploy --dev --verbose
 
-ADD . ./
+ADD app ./
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
