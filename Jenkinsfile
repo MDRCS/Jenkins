@@ -5,14 +5,15 @@ pipeline {
         steps {
             echo "Building .."
             which make
-            sh 'make build'
+            // sh 'make build'
 
         }
       }
       stage('Unit Test') {
         steps {
-            echo "Building .."
-            sh 'make test'
+            echo "Testing .."
+            sh 'python -m pytest -v'
+            // sh 'make test'
         }
       }
     }
