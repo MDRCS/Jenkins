@@ -4,7 +4,7 @@ pipeline {
       stage('Build') {
         steps {
             sh '''
-                sudo apt-get install build-essential
+                apt-get install build-essential
                 echo $PATH
                 echo "building .."
                 make build
