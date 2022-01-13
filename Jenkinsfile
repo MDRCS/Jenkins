@@ -3,12 +3,12 @@ pipeline {
     stages {
       stage('Build') {
         steps {
-            sh 'make build'
+            sh 'docker-compose build'
         }
       }
       stage('Unit Test') {
         steps {
-            sh 'make test'
+            sh 'docker-compose run --rm app python -m pytest -v'
         }
       }
     }
