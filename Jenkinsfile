@@ -4,10 +4,9 @@ pipeline {
       stage('Build') {
         steps {
             sh '''
-                apt-get install build-essential
-                echo $PATH
+                echo $PATHs
                 echo "building .."
-                make build
+                ./make build
                '''
         }
       }
@@ -15,7 +14,7 @@ pipeline {
         steps {
             sh '''
                echo "testing .."
-               make test
+               ./make test
                '''
         }
       }
