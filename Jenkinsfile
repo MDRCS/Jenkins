@@ -3,12 +3,15 @@ pipeline {
     stages {
       stage('Build') {
         steps {
-            sh 'docker-compose build'
+            sh 'sudo apt-get install build-essential
+                echo $PATH
+                echo building ..
+                make build'
         }
       }
       stage('Unit Test') {
         steps {
-            sh 'docker-compose run --rm app python -m pytest -v'
+            sh 'make test'
         }
       }
     }
