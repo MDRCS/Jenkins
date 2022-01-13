@@ -4,18 +4,14 @@ pipeline {
       stage('Build') {
         steps {
             sh '''
-                echo $PATHs
-                echo "building .."
-                ./make build
+                which make
+                make build
                '''
         }
       }
       stage('Unit Test') {
         steps {
-            sh '''
-               echo "testing .."
-               ./make test
-               '''
+            sh 'make test'
         }
       }
     }
