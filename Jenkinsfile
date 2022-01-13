@@ -3,15 +3,20 @@ pipeline {
     stages {
       stage('Build') {
         steps {
-            sh 'sudo apt-get install build-essential
+            sh '''
+                sudo apt-get install build-essential
                 echo $PATH
-                echo building ..
-                make build'
+                echo "building .."
+                make build
+               '''
         }
       }
       stage('Unit Test') {
         steps {
-            sh 'make test'
+            sh '''
+               echo "testing .."
+               make test
+               '''
         }
       }
     }
