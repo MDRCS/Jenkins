@@ -2,7 +2,7 @@
 #  http://jenkins-ci.org/
 #  https://wiki.jenkins-ci.org/display/JENKINS/Administering+Jenkins
 
-.idea/*
+../.idea/misc.xml
 .DS_Store
 __pycache__/
 

@@ -38,4 +38,36 @@
     + When you create a pipeline in Blue Ocean, it automatically saves your pipeline design as pipeline code, 
      which is saved as a Jenkinsfile inside your source control repository.
 
+### 4- getting started - Create CI Pipeline For Flask APP
+    1- prepare A simple Flask app with Dockerfile, DockerCompose and test_app.py 
+    2- Create a Dockerfile for Jenkins based on jenkins Blue Ocean Image (FROM jenkinsci/blueocean)
+    3- Build Image using this command :
+    $ sudo docker build -t jenkins-blueocean .
+    4- Run Container using this command :
+    $ sudo docker run --user root \
+		 -v /var/run/docker.sock:/var/run/docker.sock \
+		 -p 8080:8080 -p 50000:50000 jenkins-blueocean
+    5- Prepare Makefile To run `Build` and `test` commands
+    6- Prepare `Jenkinsfile` that run commands on every stage.
+        ex: | 
+            pipeline {
+                agent any
+                stages {
+                  stage('Build') {
+                    steps {
+                        echo "Building .."
+                        sh 'make build'
+            
+                    }
+                  }
+                  stage('Unit Test') {
+                    steps {
+                        echo "Testing .."
+                        sh 'make test'
+                    }
+                  }
+                }
+            }
+     
+    * Congrats you have setup a CI pipeline               
     
