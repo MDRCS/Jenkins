@@ -12,7 +12,7 @@ pipeline {
       stage('Unit Test') {
         steps {
             echo "Testing .."
-            sh 'python -m pytest -v'
+            sh 'python3 app_test.py'
             // sh 'make test'
         }
       }
