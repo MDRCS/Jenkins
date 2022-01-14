@@ -38,7 +38,15 @@
     + When you create a pipeline in Blue Ocean, it automatically saves your pipeline design as pipeline code, 
      which is saved as a Jenkinsfile inside your source control repository.
 
-### 4- getting started - Create CI Pipeline For Flask APP
+### 4- getting started - Create CI Pipeline For Flask APP :
+    
+    NB: For Password in the first run you can find it printed in shell 
+        or you can check this file inside container -> “/var/jenkins_home/secrets/initialAdminPassword”
+        using this command :
+
+        $ docker exec -it jenkins /bin/bash -c \
+          "cat /var/jenkins_home/secrets/initialAdminPassword"
+
     1- prepare A simple Flask app with Dockerfile, DockerCompose and test_app.py 
     2- Create a Dockerfile for Jenkins based on jenkins Blue Ocean Image (FROM jenkinsci/blueocean)
     3- Build Image using this command :
@@ -71,3 +79,50 @@
      
     * Congrats you have setup a CI pipeline               
     
+### 5- Groovy Function :
+
+    - you can create separate function in groovy and call it inside jenkinsfile as following :
+    
+    ++ Function : | def greet(message) {
+                        echo "Hello, {message} welcome to Jenkins Blue Ocean"
+                    }
+
+    ++ and call it in Jenkinsfile : | pipeline {
+                                                    agent any
+                                                    stages {
+                                                      stage('Example') {
+                                                        steps {
+                                                            script {
+                                                                example.greet "Readers" // import function that we wrote and pass `Readers` as argument.
+                                                            }
+                                                        }
+                                                      }
+                                                    }
+                                                }
+
+    
+    - NB: Do I Still Need to Visit the Standard Jenkins Interface?
+          The answer is yes. To work with the Classic Jenkins Projects—such as Freestyle Project, 
+          Multi-configuration Project, Pipeline Project, to name a few—you must visit the Classic Jenkins UI.
+
+    
+### - Jenkins Disaster Recovery - Running Jenkins using a Volume :
+
+    ++ Jenkins Disaster Recovery
+    The jenkins_home directory stores all the Jenkins configuration and data. 
+    Reading/writing the content of jenkins_home to a docker volume allows you to recover your Jenkins server during failures.
+
+    $ docker volume create jenkins_home
+    $ docker volume ls
+	
+    - To get detailed info about your docker volume, use the docker inspect command.
+    $ docker volume inspect jenkins_home
+
+    - Finally to run the container use this cmd :
+      $  docker run -d --name jenkins \
+        -p 8080:8080 -p 50000:50000 \
+        -v jenkins_home:/var/jenkins_home \ # use volume to persist data read/write
+        jenkinsci/blueocean”
+    
+      - check the host :
+      $ docker inspect jenkins  

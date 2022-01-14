@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages {
+      stage('Example') {
+        steps {
+            script {
+                example.greet "Readers" // import function that we wrote and pass `Readers` as argument.
+            }
+        }
+      }
+    }
+}
