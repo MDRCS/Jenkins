@@ -29,14 +29,3 @@ RUN docker-compose -version
 
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
-
-
-# command to run this dockerfile -> sudo docker build -t custom-jenkins .
-
-# After the image custom-jenkins is finished, run it with
-
-# use user root other than default jenkins to avoid permission problem
-# use docker on the host, because there is no docker daemon in a docker container
-# sudo docker run --user root \
-#		 -v /var/run/docker.sock:/var/run/docker.sock \
-#		 -p 8080:8080 -p 50000:50000 custom-jenkins

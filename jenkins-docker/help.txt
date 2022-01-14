@@ -1,0 +1,5 @@
+- To build docker image :
+$ sh build.sh
+
+- To run docker container :
+$ sh run.sh
